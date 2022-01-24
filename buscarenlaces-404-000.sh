@@ -11,6 +11,12 @@ then
 else
 	url_check=$url_in
 fi
+
+#clean url
+clean_url=`./clean_url.sh $url_check`
+url_check=$clean_url
+
+
 printf "$url_check "
 nombre=`echo "$url_check" | sed -e 's#/#_#g' | sed -e 's#:#_#g' | sed -e 's#&#_#g' | sed -e 's#=#_#g'`
 
@@ -30,7 +36,7 @@ printf "\n"
 printf "$url_check "
 for url in `cat tmp/$nombre`
 do
-	clean_url=`echo $url | sed -e 's#"with##g' | sed -e 's#"##g' | sed -e 's#"with##g' | sed -e 's#"##g' | sed -e 's#\[.*\]##g'`
+	clean_url=`./clean_url.sh $url`
 	valid=1
 	code=`curl -L --connect-timeout 3 --write-out "%{http_code}" --output /dev/null --silent --head --fail "$clean_url"`
 	if [ "$code" -eq "404" ]

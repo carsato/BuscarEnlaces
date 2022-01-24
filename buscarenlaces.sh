@@ -11,6 +11,11 @@ then
 else
 	url_check=$url_in
 fi
+
+#clean url
+clean_url=`./clean_url.sh $url_check`
+url_check=$clean_url
+
 printf "$url_check\n"
 nombre=`echo "$url_check" | sed -e 's#/#_#g' | sed -e 's#:#_#g' | sed -e 's#&#_#g' | sed -e 's#=#_#g'`
 
