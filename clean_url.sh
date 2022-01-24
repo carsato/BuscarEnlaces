@@ -15,4 +15,4 @@ echo $url |
 	sed -e 's#)##g'
 `
 
-printf "$clean_url"
+printf '%s\n' "$clean_url"
